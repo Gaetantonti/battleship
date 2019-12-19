@@ -15,9 +15,6 @@ public class Client extends Application{
 	private static final String hostname = "localhost";
 	private static final int PORT = 23;
 	Socket socket;
-	
-	public Client() {
-	}
 
 	public void connect() {
 		try {
@@ -33,6 +30,8 @@ public class Client extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		try {
+			Client client = new Client();
+			client.connect();
 			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/ConnectionView.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getClassLoader().getResource("view/application.css").toExternalForm());
