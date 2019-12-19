@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import server.Client;
 
 public class ConnectionController implements Initializable{
 	
@@ -22,11 +23,15 @@ public class ConnectionController implements Initializable{
 	@FXML
 	public void pressConnectionButton() throws Exception {               
 	    try {
+	    	Client client = new Client(nickname.getText());
+			client.connect();
 	    	Stage stageToClose = (Stage) nickname.getScene().getWindow();
 	    	stageToClose.close();
-	    	Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/WaitingRoomView.fxml"));
+	    	FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/WaitingRoomView.fxml"));
+	    	WaitingRoomController wrc = new WaitingRoomController(client);
+	    	loader.setController(wrc);
 	        Stage stage = new Stage();
-	        stage.setScene(new Scene(root));  
+	        stage.setScene(new Scene(loader.load()));  
 	        stage.show();
 	    } catch(Exception e) {
 	        e.printStackTrace();
