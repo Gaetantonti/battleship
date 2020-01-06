@@ -2,6 +2,7 @@ package server;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -27,22 +28,26 @@ public class Client{
 			socket = new Socket();
 			socket.connect(new InetSocketAddress(hostname, PORT), 200);
 			System.out.println("Successful connection");
-            try {
+            
+			 ObjectOutputStream objectOutput = new ObjectOutputStream(socket.getOutputStream());
+		        objectOutput.writeObject(nickname);
+			} catch (Exception e) {
+				System.err.println(e);
+				System.out.println("Failed connection");
+			}
+		
+			try {
                 ObjectInputStream objectInput = new ObjectInputStream(socket.getInputStream());
                 try {
                     Object object = objectInput.readObject();
                     connectedClients =  (ArrayList<String>) object;
-                    System.out.println(connectedClients);
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-            }           
-		} catch (Exception e) {
-			System.err.println(e);
-			System.out.println("Failed connection");
-		}
+            } 
+           
 	}
 	
 	public List<String> getConnectedClients(){

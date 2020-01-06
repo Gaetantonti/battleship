@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="271.0" prefWidth="275.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ConnectionController">
-   <children>
-      <Button layoutX="80.0" layoutY="185.0" mnemonicParsing="false" onAction="#pressConnectionButton" text="CONNECTION" />
-      <TextField fx:id="nickname" layoutX="44.0" layoutY="120.0" promptText="Nickname" />
-      <Text layoutX="62.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ENTER YOUR NICKNAME" />
-   </children>
-</AnchorPane>
+<BorderPane prefHeight="146.0" prefWidth="203.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ConnectionController">
+   <top>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="PLEASE ENTER YOUR NICKNAME" translateY="20.0" BorderPane.alignment="CENTER" />
+   </top>
+   <center>
+      <TextField fx:id="nickname" promptText="Nickname" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets left="10.0" right="10.0" />
+         </BorderPane.margin>
+      </TextField>
+   </center>
+   <bottom>
+      <Button mnemonicParsing="false" onAction="#pressConnectionButton" prefHeight="32.0" prefWidth="87.0" text="Connection" translateY="-20.0" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>
