@@ -31,7 +31,9 @@ public class ConnectionController implements Initializable{
 	    	WaitingRoomController wrc = new WaitingRoomController(client);
 	    	loader.setController(wrc);
 	        Stage stage = new Stage();
-	        stage.setScene(new Scene(loader.load()));  
+	        Scene scene = new Scene(loader.load());
+	        scene.getStylesheets().add(getClass().getClassLoader().getResource("view/application.css").toExternalForm());
+	        stage.setScene(scene);
 	        stage.show();
 	    } catch(Exception e) {
 	        e.printStackTrace();
