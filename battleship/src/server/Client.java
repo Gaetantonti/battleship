@@ -34,18 +34,18 @@ public class Client {
 	public WaitingRoom getWaitingRoom() {
 		return waitingRoom;
 	}
-	
+
 	public void setWaitingRoom(WaitingRoom waitingRoom) {
 		this.waitingRoom = waitingRoom;
 	}
-	
+
 	public String getNickname() {
 		return nickname;
 	}
 
 	public void sendMessage(String message) throws IOException, ClassNotFoundException {
 		objectOutput.writeObject(message);
-		if(message.equals("WTR")) {
+		if (message.equals("WTR")) {
 			Object object = objectInput.readObject();
 			WaitingRoom wr = (WaitingRoom) object;
 			this.setWaitingRoom(wr);

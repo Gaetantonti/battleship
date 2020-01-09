@@ -82,7 +82,15 @@ public class OneClientServer extends Thread{
 				waitingRoom.removePlayer((String) request.substring(3));
 				endSession = true;
 				break;
+			case "INV":
+				int starIndex = request.indexOf("*");
+				String player1 = request.substring(3, starIndex);
+				String player2 = request.substring(starIndex + 1);
+				waitingRoom.addInvitation(player1, player2);
+				System.out.println("Invitations : " + waitingRoom.getInvitations());
+				break;
 			}
+			
 		}
     }
 }

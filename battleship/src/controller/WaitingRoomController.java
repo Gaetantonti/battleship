@@ -2,8 +2,8 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -14,6 +14,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import server.Client;
+import server.WaitingRoom;
 
 public class WaitingRoomController implements Initializable {
 
@@ -42,8 +43,8 @@ public class WaitingRoomController implements Initializable {
 
 	public void initWaitingRoom() throws IOException, ClassNotFoundException {
 		client.sendMessage("WTR");
-		numberOfClients.setText("Players online : " + String.valueOf(client.getWaitingRoom().getPlayerList().size() - 1));
-		connectedClients.getItems().clear();
+		numberOfClients
+				.setText("Players online : " + String.valueOf(client.getWaitingRoom().getPlayerList().size() - 1));
 		for (String s : client.getWaitingRoom().getPlayerList()) {
 			if (!s.equals(client.getNickname())) {
 				connectedClients.getItems().add(s);
@@ -56,17 +57,34 @@ public class WaitingRoomController implements Initializable {
 			@Override
 			public void handle(ActionEvent e) {
 				try {
-					initWaitingRoom();
+					List<String> listBefore = client.getWaitingRoom().getPlayerList();
+					client.sendMessage("WTR");
+					if (!client.getWaitingRoom().getPlayerList().equals(listBefore)) {
+						numberOfClients.setText("Players online : "
+								+ String.valueOf(client.getWaitingRoom().getPlayerList().size() - 1));
+						connectedClients.getItems().clear();
+						for (String s : client.getWaitingRoom().getPlayerList()) {
+							if (!s.equals(client.getNickname())) {
+								connectedClients.getItems().add(s);
+							}
+						}
+					}
+
 				} catch (ClassNotFoundException | IOException e1) {
 					e1.printStackTrace();
 				}
 			}
 		};
-		new KeyFrame(Duration.seconds(1), e);
 		KeyFrame k = new KeyFrame(Duration.seconds(1), e);
 		Timeline refreshWaitingRoom = new Timeline(k);
 		refreshWaitingRoom.setCycleCount(Timeline.INDEFINITE);
 		refreshWaitingRoom.play();
+	}
+
+	@FXML
+	private void sendInvitation() throws ClassNotFoundException, IOException {
+		String player2 = (String) connectedClients.getSelectionModel().getSelectedItem();
+		client.sendMessage("INV" + client.getNickname() + "*" + player2);
 	}
 
 }
