@@ -28,7 +28,6 @@ public class Client {
 		objectOutput = new ObjectOutputStream(socket.getOutputStream());
 		objectInput = new ObjectInputStream(socket.getInputStream());
 		sendMessage("NCK" + nickname);
-		sendMessage("WTR");
 	}
 
 	public WaitingRoom getWaitingRoom() {
