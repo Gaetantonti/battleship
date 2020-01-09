@@ -29,7 +29,8 @@ public class OneClientServer extends Thread{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-    	while (true) {
+		boolean endSession = false;
+    	while (!endSession) {
 			String request = null;
 			try {
 				request = (String) objectInput.readObject();
@@ -51,6 +52,10 @@ public class OneClientServer extends Thread{
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+				break;
+			case "DEL":
+				waitingRoom.removePlayer((String) request.substring(3));
+				endSession = true;
 				break;
 			}
 		}

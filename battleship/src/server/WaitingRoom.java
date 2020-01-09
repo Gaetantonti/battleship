@@ -20,4 +20,8 @@ public class WaitingRoom implements Serializable{
 	public void addPlayer(String nickname) {
 		playerList.add(nickname);
 	}
+	
+	public void removePlayer(String nickname) {
+		playerList.remove(nickname);
+	}
 }
