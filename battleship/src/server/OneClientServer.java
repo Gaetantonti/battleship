@@ -39,7 +39,32 @@ public class OneClientServer extends Thread{
 			}
 			switch (request.substring(0, 3)) {
 			case "NCK":
-				waitingRoom.addPlayer((String) request.substring(3));
+				if(!waitingRoom.nicknameExists(request.substring(3))) {
+					waitingRoom.addPlayer(request.substring(3));
+					try {
+						objectOutput.writeObject(true);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					try {
+						objectOutput.reset();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				else {
+					try {
+						objectOutput.writeObject(false);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					try {
+						objectOutput.reset();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					endSession = true;
+				}
 				break;
 			case "WTR":
 				try {

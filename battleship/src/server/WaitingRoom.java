@@ -17,6 +17,14 @@ public class WaitingRoom implements Serializable{
 		return playerList;
 	}
 	
+	public boolean nicknameExists(String nickname) {
+		boolean b = false;
+		if (playerList.contains(nickname)){
+			b = true;
+		}
+		return b;
+	}
+	
 	public void addPlayer(String nickname) {
 		playerList.add(nickname);
 	}

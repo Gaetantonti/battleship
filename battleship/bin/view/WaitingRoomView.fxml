@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Text?>
 
@@ -10,10 +11,19 @@
       <ListView fx:id="connectedClients" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
    <top>
-      <Text fx:id="numberOfClients" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" BorderPane.alignment="TOP_LEFT">
-         <BorderPane.margin>
-            <Insets bottom="10.0" left="10.0" top="10.0" />
-         </BorderPane.margin>
-      </Text>
+      <SplitPane dividerPositions="0.5" prefHeight="47.0" prefWidth="610.0" BorderPane.alignment="CENTER">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Text fx:id="numberOfClients" layoutX="13.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="270.13671875" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Text fx:id="myNickname" layoutX="13.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="270.13671875" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
    </top>
 </BorderPane>

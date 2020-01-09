@@ -20,14 +20,15 @@ public class Client {
 		this.nickname = nickname;
 	}
 
-	public void connect() throws IOException, ClassNotFoundException {
-
+	public boolean connect() throws IOException, ClassNotFoundException {
 		socket = new Socket();
 		socket.connect(new InetSocketAddress(hostname, PORT), 200);
-		System.out.println("Successful connection");
 		objectOutput = new ObjectOutputStream(socket.getOutputStream());
 		objectInput = new ObjectInputStream(socket.getInputStream());
 		sendMessage("NCK" + nickname);
+		Object object = objectInput.readObject();
+		boolean response = (boolean) object;
+		return response;
 	}
 
 	public WaitingRoom getWaitingRoom() {

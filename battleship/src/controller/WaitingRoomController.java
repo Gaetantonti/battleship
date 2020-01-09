@@ -22,6 +22,8 @@ public class WaitingRoomController implements Initializable {
 	private ListView<String> connectedClients;
 	@FXML
 	private Text numberOfClients;
+	@FXML
+	private Text myNickname;
 
 	public WaitingRoomController(Client client) {
 		this.client = client;
@@ -34,6 +36,7 @@ public class WaitingRoomController implements Initializable {
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
+		myNickname.setText("You are connected as '" + client.getNickname() + "'");
 		refreshWaitingRoom();
 	}
 
