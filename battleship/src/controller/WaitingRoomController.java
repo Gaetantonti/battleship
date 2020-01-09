@@ -28,7 +28,6 @@ public class WaitingRoomController implements Initializable {
 	}
 	
 	public void refresh() throws IOException, ClassNotFoundException {
-		client.sendMessage("NCKJoueur2");
 		client.sendMessage("WTR");
 		connectedClients.getItems().clear();
 		for (String s : client.getWaitingRoom().getPlayerList()) {
