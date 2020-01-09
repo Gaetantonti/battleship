@@ -11,6 +11,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import server.Client;
 
@@ -19,6 +20,8 @@ public class WaitingRoomController implements Initializable {
 	private Client client;
 	@FXML
 	private ListView<String> connectedClients;
+	@FXML
+	private Text numberOfClients;
 
 	public WaitingRoomController(Client client) {
 		this.client = client;
@@ -33,15 +36,18 @@ public class WaitingRoomController implements Initializable {
 		}
 		refreshWaitingRoom();
 	}
-	
+
 	public void initWaitingRoom() throws IOException, ClassNotFoundException {
 		client.sendMessage("WTR");
+		numberOfClients.setText("Players online : " + String.valueOf(client.getWaitingRoom().getPlayerList().size() - 1));
 		connectedClients.getItems().clear();
 		for (String s : client.getWaitingRoom().getPlayerList()) {
-			connectedClients.getItems().add(s);
+			if (!s.equals(client.getNickname())) {
+				connectedClients.getItems().add(s);
+			}
 		}
 	}
-	
+
 	private void refreshWaitingRoom() {
 		EventHandler<ActionEvent> e = new EventHandler<ActionEvent>() {
 			@Override
