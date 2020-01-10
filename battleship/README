@@ -1,0 +1,16 @@
+PROJET DE BATAILLE NAVALE AVEC L'UTILISATION DES SOCKETS
+
+Louis Tracadas-Moureau & Gaëtan Tonti
+
+Utilisation du programme:
+
+- Lancer le fichier intitulé "Server" afin d'ouvrir un serveur.
+- Lancer le fichier "ClientApplication" pour ouvrir l'application utilisable par le client.
+
+Description:
+
+Lors du lacement de l'application de l'utilisateur, une fenêtre apparaît et demande le pseudonyme du joueur.
+Puis le client se connecte au serveur en cliquant sur le bouton "Connection".
+Le programme vérifie d'abord que le pseudonyme n'est pas déjà utilisé par un autre joueur.
+L'utilisateurs arrive ensuite dans une salle d'attente où il peut voir le nombre de joueurs connectés et leurs noms.
+Lors de la fermeture de cette fenêtre, le client est déconnecté du serveur et son nom est supprimé des salles d'attente des autres joueurs.
