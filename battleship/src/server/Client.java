@@ -15,6 +15,7 @@ public class Client {
 	private String nickname;
 	ObjectOutputStream objectOutput;
 	ObjectInputStream objectInput;
+	private String invitedBy = null;
 
 	public Client(String nickname) {
 		this.nickname = nickname;
@@ -41,6 +42,10 @@ public class Client {
 
 	public String getNickname() {
 		return nickname;
+	}
+	
+	public void setInvitedBy(String nickname) {
+		this.invitedBy = nickname;
 	}
 
 	public void sendMessage(String message) throws IOException, ClassNotFoundException {

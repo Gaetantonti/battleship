@@ -9,9 +9,12 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import server.Client;
 import server.WaitingRoom;
@@ -39,6 +42,7 @@ public class WaitingRoomController implements Initializable {
 		}
 		myNickname.setText("You are connected as '" + client.getNickname() + "'");
 		refreshWaitingRoom();
+		// checkInvitations();
 	}
 
 	public void initWaitingRoom() throws IOException, ClassNotFoundException {
@@ -73,6 +77,27 @@ public class WaitingRoomController implements Initializable {
 				} catch (ClassNotFoundException | IOException e1) {
 					e1.printStackTrace();
 				}
+
+				if (!client.getWaitingRoom().getInvitations().isEmpty()) {
+					String nickname = null;
+					for (int i = 0; i < client.getWaitingRoom().getInvitations().size(); i++) {
+						if (client.getWaitingRoom().getInvitations().get(i).get(1).equals(client.getNickname())) {
+							nickname = client.getWaitingRoom().getInvitations().get(i).get(0);
+							System.out.println(nickname);
+						}
+					}
+					if(!nickname.equals(null)) {
+						FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/InvitationView.fxml"));
+						Stage stage = new Stage();
+				        try {
+							stage.setScene(new Scene(loader.load()));
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+				        stage.show();
+					}
+				}
+
 			}
 		};
 		KeyFrame k = new KeyFrame(Duration.seconds(1), e);
